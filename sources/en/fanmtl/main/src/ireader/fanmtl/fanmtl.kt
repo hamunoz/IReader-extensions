@@ -104,8 +104,8 @@ abstract class Fanmtl(private val deps: Dependencies) : SourceFactory(
                 ) { headersBuilder() }.bodyAsText()
             Log.error { response }
             val mangas = response.asJsoup().select(".novel-item").map { html ->
-                val name = html.select(".a").text().trim()
-                val cover = html.select(".cover-wrap img").attr("src")
+                val name = html.select(".a").attr("h4").text().trim()
+                val cover = html.select(".cover-wrap img").attr("data-src")
                 val url = baseUrl + html.select("a").attr("href")
                 MangaInfo(
                     key = url,
