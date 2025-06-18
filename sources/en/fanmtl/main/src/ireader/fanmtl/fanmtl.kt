@@ -106,6 +106,7 @@ abstract class Fanmtl(private val deps: Dependencies) : SourceFactory(
             val mangas = response.asJsoup().select(".novel-item").map { html ->
                 //val name = html.select(".a").text().trim()
                 val name = html.select("a").attr("title").trim()
+                //change src to data-src
                 val cover = html.select(".cover-wrap img").attr("data-src")
                 val url = baseUrl + html.select("a").attr("href")
                 MangaInfo(
