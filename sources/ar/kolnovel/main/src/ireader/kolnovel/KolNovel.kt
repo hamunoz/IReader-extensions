@@ -20,7 +20,7 @@ abstract class KolNovel(deps: Dependencies) : SourceFactory(
     override val lang: String
         get() = "ar"
     override val baseUrl: String
-        get() = "https://kolnovel.com"
+        get() = "https://kolnovel.site"
     override val id: Long
         get() = 41
     override val name: String
@@ -140,5 +140,11 @@ abstract class KolNovel(deps: Dependencies) : SourceFactory(
         get() = SourceFactory.Content(
             pageTitleSelector = ".epheader",
             pageContentSelector = "div.entry-content p:not([style~=opacity]), div.entry-content ol li",
+            onContent = { contents: List<String> ->
+        contents.map { text ->
+            text.replace("*إقرأ* رواياتنا* فقط* على* مو*قع م*لوك الرو*ايات ko*lno*vel ko*lno*vel. com", "", ignoreCase = true)
+                .trim()
+        }
+    }
         )
 }
